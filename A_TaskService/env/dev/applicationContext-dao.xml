@@ -7,4 +7,10 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	
 	<bean name="keywordsDao" class="pub.willow.a.taskservice.dao.impl.KeywordsDaoImpl"></bean>
 	
+	<bean name="listpageDao" class="pub.willow.a.taskservice.dao.impl.ListpageDaoImpl"></bean>
+	
+	<bean name="taskDao" class="pub.willow.a.taskservice.dao.impl.TaskDaoImpl"></bean>
+	
+	<bean name="dataDao" class="pub.willow.a.taskservice.dao.impl.DataDaoImpl"></bean>
+	
 </beans>
