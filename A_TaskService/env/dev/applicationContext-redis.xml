@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">  
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxActive" value="50" />
+        <property name="maxIdle" value="8" />
+        <property name="maxWait" value="1000" />
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="true"/>
+    </bean>
+
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool"  scope="singleton">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1">
+            <list>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                    <constructor-arg name="host" value="192.168.1.14" />
+                    <constructor-arg name="port" value="6379" />
+                    <constructor-arg name="timeout" value="10000" />
+                    <constructor-arg name="weight" value="1" />
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="redisDataSource" class="pub.willow.a.baseservice.redis.impl.RedisDataSourceImpl">
+    	<property name="shardedJedisPool">
+    		<ref local="shardedJedisPool"/>
+    	</property>
+    </bean>
+    
+    <bean id="redisClient" 
+    	  class="pub.willow.a.baseservice.redis.RedisClient">
+    	<property name="redisDataSource">
+			<ref local="redisDataSource"/>    		
+    	</property>
+    </bean>
+</beans>

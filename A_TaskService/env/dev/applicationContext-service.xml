@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	default-autowire="byName">
+	
+	<bean name="spiderInfoService" class="pub.willow.a.taskservice.service.impl.SpiderInfoServiceImpl"></bean>
+	
+	<bean name="generateTaskService" class="pub.willow.a.taskservice.service.task.impl.GenerateTaskServiceImpl"></bean>
+	
+	<bean name="webService" class="pub.willow.a.taskservice.service.WebService"></bean>
+	
+	<bean name="distributeTaskService" class="pub.willow.a.taskservice.service.task.DistributeTaskService"></bean>
+	
+	<bean name="doTaskService" class="pub.willow.a.taskservice.service.task.impl.DoTaskServiceImpl"></bean>
+	
+	<bean name="parseService" class="pub.willow.a.taskservice.service.parse.impl.ParseServiceImpl"></bean>
+</beans>
