@@ -30,7 +30,7 @@ public class SpiderInfoServiceImpl implements SpiderInfoService {
 	}
 	
 	public String getRandomSpider() {
-		String[] spiders = {"153.36.230.135"};
+		String[] spiders = {"localhost"};
 		int spiderNum = spiders.length;
 		return spiders[new Random().nextInt(spiderNum)];
 	}

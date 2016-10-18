@@ -84,6 +84,8 @@ public class ParseServiceImpl implements ParseService {
 		}
 		List<DataBean> dataBeanList = new ArrayList<DataBean>();
 		for(Map<String, String> m:topicMapList) {
+			
+			
 			DataBean dataBean = new DataBean();
 			dataBean.setTaskId(taskBean.getId());
 			dataBean.setKeywordId(taskBean.getKeywordId());
@@ -93,10 +95,33 @@ public class ParseServiceImpl implements ParseService {
 			dataBean.setTitle(m.get("title"));
 			dataBean.setUrl(m.get("url"));
 			dataBean.setSummary(m.get("summary"));
+			String title = m.get("title");
+			String source = getSource(title) ;
+			
+				dataBean.setSource(title.substring(title.lastIndexOf("_")));
 			dataBeanList.add(dataBean);
 		}
 		
 		return dataBeanList;
+	}
+
+	private String getSource(String title) {
+		String source =title;
+		if(title == null) {
+			return null;
+		}
+		if(title.contains("_")) {
+			source = title.substring(title.lastIndexOf("_") +1).trim();
+			if(source.contains("-")) {
+				source = source.substring(source.lastIndexOf("-") +1).trim();
+			}
+		} else if(title.contains("-")) {
+			source = title.substring(title.lastIndexOf("-") +1).trim();
+		}
+		if(source.contains("...")) {
+			source = null;
+		}
+		return source;
 	}
 
 	private Map<String, String> getFieldRuleMap(int listpageId) {
