@@ -20,12 +20,12 @@ public class DataDaoImpl extends BaseDao implements DataDao  {
 		if(dataBeanList == null || dataBeanList.size()<=0) {
 			return 0;
 		}
-		String sql = "insert into data (site_id,listpage_id,keyword_id,keyword,title,summary,url,create_time) values(?,?,?,?,?,?,?,now())";
+		String sql = "insert into data (site_id,listpage_id,task_id,keyword_id,keyword,title,summary,url,spider,create_time) values(?,?,?,?,?,?,?,?,?,now())";
 		
 		DBUtil db = getDbUtilByDbName(A_PROJECT);
 		List<String[]> paramsList = new ArrayList<String[]>();
 		for(DataBean dataBean:dataBeanList) {
-			String[] params = {dataBean.getSiteId()+"",dataBean.getListpageId()+"",dataBean.getKeywordId()+"",dataBean.getKeyword(),dataBean.getTitle(),dataBean.getSummary(),dataBean.getUrl()};
+			String[] params = {dataBean.getSiteId()+"",dataBean.getListpageId()+"",dataBean.getTaskId()+"",dataBean.getKeywordId()+"",dataBean.getKeyword(),dataBean.getTitle(),dataBean.getSummary(),dataBean.getUrl(),dataBean.getSpider()};
 			paramsList.add(params);
 		}
 //		db.prepareExecuteUpdateBatch(sql, paramsList );

@@ -36,6 +36,10 @@ public class DoTaskServiceImpl implements DoTaskService {
 				continue;
 			}
 			TaskBean task = taskDao.queryOneTask(Status.WAITING);
+			if(task == null) {
+				System.out.println("No task.");
+				break;
+			}
 			int taskId = task.getId();
 			
 			try {
@@ -45,23 +49,40 @@ public class DoTaskServiceImpl implements DoTaskService {
 				int keywordId = task.getKeywordId();
 				String keyword = task.getKeyword();
 				int lispageId = task.getListpageId();
-				String path = "D:\\Willow\\A_Project\\" +keywordId+"_"+lispageId + ".txt";
+				String path = "D:\\Willow\\A_Project\\" +taskId+"_"+keywordId+"_"+lispageId + ".txt";
 				saveFile(source,path );
 				task.setKeyword(keyword);
+				
 				 List<DataBean> dataBeanList = parseService.parseHtml(task);
+				 setSpider(dataBeanList,spider);
 				 dataDao.insertData(dataBeanList);
 				 
 				taskDao.updateTaskStatus(taskId , Status.DONE);
-				Thread.sleep(8000);
+				Thread.sleep(1000);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				try {
+					System.out.println(task.getSource());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				taskDao.updateTaskStatus(taskId , Status.ERROR);
 			}
 		}
 		
 	}
 	
+	private void setSpider(List<DataBean> dataBeanList, String spider) {
+		if(dataBeanList == null || dataBeanList.size()<=0){
+			return ;
+		}
+		for(DataBean dataBean: dataBeanList){
+			dataBean.setSpider(spider);
+		}
+		
+	}
+
 	public static void saveFile(String content, String path) {
 		File f = new File(path);
 		FileWriter fw;

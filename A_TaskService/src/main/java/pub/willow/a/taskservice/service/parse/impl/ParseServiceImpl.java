@@ -52,8 +52,12 @@ public class ParseServiceImpl implements ParseService {
 					topic = tempTopic;
 					fieldName = fieldRuleIt.next();
 					fieldRule = fieldRuleMap.get(fieldName);
-					// 该正则匹配{{。。。}}。。。{{。。。}}，其中，1、}}前面不能有转义字符\,2、中间的。。。可以没有，但如果有，不能是转义字符。
-						fieldInfo = RegexUtil.getMatchInfoSingle(topic, fieldRule);
+					
+					fieldInfo = RegexUtil.getMatchInfoSingle(topic, fieldRule);
+					if(fieldInfo == null && fieldRule.contains("line-clamp")) {
+						System.out.println(fieldInfo);
+						fieldInfo = RegexUtil.getMatchInfoSingle(topic, fieldRule, 2);
+					}
 					// 处理经过正则抽取之后的html乱码
 					fieldInfo = DomTree.fiterHtml(fieldInfo);
 					fieldInfo = WebpageUtil.filterHtmlTags(fieldInfo);
@@ -81,7 +85,7 @@ public class ParseServiceImpl implements ParseService {
 		List<DataBean> dataBeanList = new ArrayList<DataBean>();
 		for(Map<String, String> m:topicMapList) {
 			DataBean dataBean = new DataBean();
-			// 设置爬虫周期任务的id
+			dataBean.setTaskId(taskBean.getId());
 			dataBean.setKeywordId(taskBean.getKeywordId());
 			dataBean.setKeyword(taskBean.getKeyword());
 			dataBean.setListpageId(taskBean.getListpageId());
@@ -99,14 +103,16 @@ public class ParseServiceImpl implements ParseService {
 
 		Map<String, String> fieldRuleMap = new HashMap<String, String>();
 		if (listpageId == 1) {
-			fieldRuleMap.put("list", "(<h3.*?)<[sd][pi][av]n?\\s+class=\"c-tools\"");
+//			fieldRuleMap.put("list", "(<h3.*?)<[sd][pi][av]n?\\s+class=\"c-tools\"");
+			fieldRuleMap.put("list", "(<h3.*?<[sd][pi][av]n?\\s+class=\"c-tools\"[^>]*>)");
 			fieldRuleMap.put("title", "<h3.*?<a[^>]*>(.*?)</a>");
-			fieldRuleMap.put("summary", "\">([^\"]*?)</div><div\\s*class=\"f13\"");
+			fieldRuleMap.put("summary", "</h3>(.*)");
 			fieldRuleMap.put("url", "<h3.*?<a[^>]*href\\s*=\\s*[\"']([^\"']*)");
 		} else {
 			fieldRuleMap.put("list", "(<div\\s*class=\"result\\s*c-result.*?</div>\\s*</div>\\s*</div>)");
-			fieldRuleMap.put("title", "(<h3.*?)</[dahp]>");
-			fieldRuleMap.put("summary", "(<p\\s*class=\"c-line-clamp.*?</p>)");
+			fieldRuleMap.put("title", "(<h3.*?</h3>)");
+//			fieldRuleMap.put("summary", "(<p\\s*class=\"c-line-clamp.*?</p>)");
+			fieldRuleMap.put("summary", "(<p[^>]*c-line-clamp[43].*?</p>)|百度知道</h3>(.*)");
 			fieldRuleMap.put("url", "<a href=\"([^\"]*)[^>]*>\\s*<h3");
 		}
 
