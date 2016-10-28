@@ -12,8 +12,9 @@ import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
 import pub.willow.a.baseservice.beans.TaskBean;
 import pub.willow.a.baseservice.beans.WebServiceBean;
-import pub.willow.a.spider.ws.WSICrawlTaskService;
 import pub.willow.a.taskservice.service.WebService;
+import pub.willow.simplespider.beans.SimpleSpiderBean;
+import pub.willow.simplespider.ws.WSSpider;
 
 /**
  * 任务分配模块
@@ -36,18 +37,16 @@ public class DistributeTaskService {
 		try{
 			// 遍历任务，进行匹配
 			if(taskBean != null) {
-				WebServiceBean webServiceBean = new WebServiceBean();
-				webServiceBean.setIp(spider);
-				webServiceBean.setPort(8080);
-				webServiceBean.setFilterName("service");
-				webServiceBean.setProjectName("A_Spider");
-				webServiceBean.setServiceName("wsCrawlTaskService?wsdl");
-				JaxWsProxyFactoryBean factory=  webService.findWebServiceFactory(webServiceBean);
+				JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
+				factory.setServiceClass(WSSpider.class);
+				String addr = "http://"+spider+":8080/SimpleSpider/service/wsSpider?wsdl";
+				System.out.println(addr);
+				factory.setAddress(addr);
 				//设置cxf压缩模式
 				factory.getInInterceptors().add(new GZIPInInterceptor());  
 				factory.getOutInterceptors().add(new GZIPOutInterceptor());
 				
-				WSICrawlTaskService handleTaskForCrawl = (WSICrawlTaskService) factory.create();
+				WSSpider handleTaskForCrawl = (WSSpider) factory.create();
 				
 				//设置客户端的配置信息，超时等.
 				   Client proxy = ClientProxy.getClient(handleTaskForCrawl);
@@ -59,7 +58,8 @@ public class DistributeTaskService {
 				   conduit.setClient(policy);
 				
 				System.out.println("发送任务至爬虫，爬虫的信息为："+spider);
-				taskBean = handleTaskForCrawl.crawlTask(taskBean);
+				SimpleSpiderBean simpleSpiderBean = new SimpleSpiderBean();;
+				simpleSpiderBean = handleTaskForCrawl.spiderHtml(simpleSpiderBean );
 				return taskBean;
 			}
 		}catch(Exception ex){
