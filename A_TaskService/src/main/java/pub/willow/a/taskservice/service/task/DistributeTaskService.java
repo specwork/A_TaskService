@@ -1,7 +1,5 @@
 package pub.willow.a.taskservice.service.task;
 
-import javax.annotation.Resource;
-
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
@@ -11,8 +9,6 @@ import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
 import pub.willow.a.baseservice.beans.TaskBean;
-import pub.willow.a.baseservice.beans.WebServiceBean;
-import pub.willow.a.taskservice.service.WebService;
 import pub.willow.simplespider.beans.SimpleSpiderBean;
 import pub.willow.simplespider.ws.WSSpider;
 
