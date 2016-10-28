@@ -23,9 +23,6 @@ import pub.willow.simplespider.ws.WSSpider;
  * 
  */
 public class DistributeTaskService {
-
-	@Resource(name="webService")
-	private WebService webService;
 	
 	/**
 	 * 根据任务信息生产爬虫service,进行任务执行

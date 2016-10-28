@@ -9,8 +9,6 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 	
 	<bean name="generateTaskService" class="pub.willow.a.taskservice.service.task.impl.GenerateTaskServiceImpl"></bean>
 	
-	<bean name="webService" class="pub.willow.a.taskservice.service.WebService"></bean>
-	
 	<bean name="distributeTaskService" class="pub.willow.a.taskservice.service.task.DistributeTaskService"></bean>
 	
 	<bean name="doTaskService" class="pub.willow.a.taskservice.service.task.impl.DoTaskServiceImpl"></bean>
