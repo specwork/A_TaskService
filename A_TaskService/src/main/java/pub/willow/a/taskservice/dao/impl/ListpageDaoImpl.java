@@ -6,8 +6,8 @@ import java.util.Map;
 
 import pub.willow.a.taskservice.beans.ListpageBean;
 import pub.willow.a.taskservice.dao.ListpageDao;
-import pub.willow.a.taskservice.dao.db.BaseDao;
-import pub.willow.a.taskservice.dao.db.DBUtil;
+import pub.willow.a.taskservice.dao.base.BaseDao;
+import pub.willow.a.taskservice.dao.base.DBUtil;
 import pub.willow.a.taskservice.utils.StringUtil;
 
 public class ListpageDaoImpl extends BaseDao implements ListpageDao {

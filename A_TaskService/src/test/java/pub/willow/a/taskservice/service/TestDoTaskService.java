@@ -14,7 +14,6 @@ public class TestDoTaskService extends AbstractDependencyInjectionSpringContextT
 				"applicationContext-init.xml",
 				"applicationContext-dao.xml",
 				"applicationContext-service.xml",
-				"applicationContext-redis.xml"
 //				"applicationContext-*.xml"
 	  			  };
 	}

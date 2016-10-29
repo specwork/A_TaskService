@@ -5,8 +5,8 @@ import java.util.Map;
 
 import pub.willow.a.taskservice.beans.TaskBean;
 import pub.willow.a.taskservice.dao.TaskDao;
-import pub.willow.a.taskservice.dao.db.BaseDao;
-import pub.willow.a.taskservice.dao.db.DBUtil;
+import pub.willow.a.taskservice.dao.base.BaseDao;
+import pub.willow.a.taskservice.dao.base.DBUtil;
 
 public class TaskDaoImpl extends BaseDao implements TaskDao {
 
@@ -23,8 +23,7 @@ public class TaskDaoImpl extends BaseDao implements TaskDao {
 		 }
 		 TaskBean task = new TaskBean();
 		 task.setId(Integer.parseInt(map.get("id")));
-		 task.setSiteId(Integer.parseInt(map.get("site_id")));
-		 task.setListpageId(Integer.parseInt(map.get("listpage_id")));
+		 task.setClientId(Integer.parseInt(map.get("client_id")));
 		 task.setKeywordId(Integer.parseInt(map.get("keyword_id")));
 		 task.setKeyword(map.get("keyword"));
 		 task.setUrl(map.get("url"));
@@ -34,8 +33,8 @@ public class TaskDaoImpl extends BaseDao implements TaskDao {
 
 	public void insertTask(TaskBean taskBean) {
 
-		String[] params = {taskBean.getKeywordId()+"",taskBean.getKeyword(),taskBean.getSiteId()+"",taskBean.getListpageId()+"",taskBean.getUrl(),taskBean.getCurrentPage()+"",taskBean.getCharset()};
-		String sql = "insert ignore into task (keyword_id,keyword,site_id,listpage_id,url,current_page,charset,create_time,status) values(?,?,?,?,?,?,?,now(),0)";
+		String[] params = {taskBean.getKeywordId()+"",taskBean.getClientId()+"",taskBean.getKeyword(),taskBean.getUrl(),taskBean.getCurrentPage()+"",taskBean.getCharset()};
+		String sql = "insert into task (keyword_id,client_id,keyword,url,current_page,charset,create_time,status) values(?,?,?,?,?,?,now(),0)";
 		DBUtil db = getDbUtilByDbName(A_PROJECT);
 		db.prepareExecuteUpdate(sql, params);
 	}

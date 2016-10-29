@@ -3,6 +3,7 @@ package pub.willow.a.taskservice.service.task.impl;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -41,15 +42,15 @@ public class DoTaskServiceImpl implements DoTaskService {
 				break;
 			}
 			int taskId = task.getId();
-			
+			System.out.print(new Date()+ " taskId->" +taskId);
 			try {
 				
 				task = distributeTaskService.distributeTask(task,spider);
 				String source = task.getSource();
 				int keywordId = task.getKeywordId();
 				String keyword = task.getKeyword();
-				int lispageId = task.getListpageId();
-				String path = "D:\\Willow\\A_Project\\" +taskId+"_"+keywordId+"_"+lispageId + ".txt";
+				int clientId = task.getClientId();
+				String path = "D:\\Willow\\A_Project\\" +taskId+"_"+keywordId+"_"+clientId + ".txt";
 				saveFile(source,path );
 				task.setKeyword(keyword);
 				int nextpage = source.contains(">下一页")?1:0;
@@ -58,7 +59,7 @@ public class DoTaskServiceImpl implements DoTaskService {
 				 dataDao.insertData(dataBeanList);
 				 
 				taskDao.updateTaskStatus(taskId , Status.DONE);
-				Thread.sleep(1000);
+//				Thread.sleep(5000);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

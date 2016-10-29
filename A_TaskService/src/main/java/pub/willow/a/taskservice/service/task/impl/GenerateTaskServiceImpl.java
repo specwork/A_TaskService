@@ -27,11 +27,8 @@ public class GenerateTaskServiceImpl implements GenerateTaskService {
 
 	public void generateTask() {
 
-		List<ListpageBean> listpages = listpageDao.queryListpage(0);
-
-		if (listpages == null || listpages.size() <= 0) {
-			return;
-		}
+		String charset = "UTF-8";
+		String keywordCharset = "UTF-8";
 
 		while (true) {
 			List<KeywordBean> keywords = keywordsDao.queryKeywords(Status.WAITING, 100);
@@ -42,13 +39,11 @@ public class GenerateTaskServiceImpl implements GenerateTaskService {
 
 				int keywordId = keywordBean.getId();
 				String keyword = keywordBean.getKeyword();
+				int clientId = keywordBean.getClientId();
 				try {
-					for (ListpageBean listpage : listpages) {
-						int siteId = listpage.getSiteId();
-						int listpageId = listpage.getId();
-						String listpageUrl = listpage.getUrl();
-						String charset = listpage.getCharset();
-						String keywordCharset = listpage.getKeywordCharset();
+					if (clientId == 1) {
+						String listpageUrl = "https://www.baidu.com/s?ie=utf-8&wd={keyword}&rn=30";
+
 						String keywordAfterEncode;
 
 						keywordAfterEncode = URLEncoder.encode(keyword, keywordCharset);
@@ -56,17 +51,49 @@ public class GenerateTaskServiceImpl implements GenerateTaskService {
 						String url = listpageUrl.replace("{keyword}", keywordAfterEncode);
 
 						TaskBean taskBean = new TaskBean();
-
-						taskBean.setSiteId(siteId);
-						taskBean.setListpageId(listpageId);
+						taskBean.setClientId(clientId);
+						taskBean.setCurrentPage(1);
 						taskBean.setKeywordId(keywordId);
 						taskBean.setKeyword(keyword);
 						taskBean.setCharset(charset);
 						taskBean.setUrl(url);
 
 						taskDao.insertTask(taskBean);
+						keywordsDao.updateStatus(keywordId, Status.DONE);
+					} else {
+						TaskBean taskBean = new TaskBean();
+						taskBean.setClientId(clientId);
+						taskBean.setCurrentPage(1);
+						taskBean.setKeywordId(keywordId);
+						taskBean.setKeyword(keyword);
+						taskBean.setCharset(charset);
+						
+						String keywordAfterEncode = URLEncoder.encode(keyword, keywordCharset);
+						
+						String listpageUrl = "https://m.baidu.com/s?ie=utf-8&wd={keyword}";
+						String url = listpageUrl.replace("{keyword}", keywordAfterEncode);
+						taskBean.setCurrentPage(1);
+						taskBean.setUrl(url);
+
+						taskDao.insertTask(taskBean);
+						
+						listpageUrl = "https://m.baidu.com/s?ie=utf-8&wd={keyword}&pn=10";
+						url = listpageUrl.replace("{keyword}", keywordAfterEncode);
+						taskBean.setCurrentPage(2);
+						taskBean.setUrl(url);
+						
+						taskDao.insertTask(taskBean);
+						
+						listpageUrl = "https://m.baidu.com/s?ie=utf-8&wd={keyword}&pn=20";
+						url = listpageUrl.replace("{keyword}", keywordAfterEncode);
+						taskBean.setCurrentPage(3);
+						taskBean.setUrl(url);
+						
+						taskDao.insertTask(taskBean);
+						
+						keywordsDao.updateStatus(keywordId, Status.DONE);
 					}
-					keywordsDao.updateStatus(keywordId, Status.DONE);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 					keywordsDao.updateStatus(keywordId, Status.ERROR);

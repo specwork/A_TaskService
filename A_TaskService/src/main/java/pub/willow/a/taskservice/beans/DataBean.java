@@ -3,9 +3,8 @@ package pub.willow.a.taskservice.beans;
 public class DataBean {
 	// test
 	// and again
-	private int siteId;
-	private int listpageId;
 	private int taskId;
+	private int clientId;
 	private int keywordId;
 	private String keyword;
 	private String title;
@@ -14,26 +13,20 @@ public class DataBean {
 	private String source;
 	private String spider;
 	private int nextpage; // 1:has nextpage; 2: doesn't hava nextpage;
-	
-	
 	private String spiderTime;
-	public int getSiteId() {
-		return siteId;
-	}
-	public void setSiteId(int siteId) {
-		this.siteId = siteId;
-	}
-	public int getListpageId() {
-		return listpageId;
-	}
-	public void setListpageId(int listpageId) {
-		this.listpageId = listpageId;
-	}
+	
 	public int getTaskId() {
 		return taskId;
 	}
 	public void setTaskId(int taskId) {
 		this.taskId = taskId;
+	}
+	
+	public int getClientId() {
+		return clientId;
+	}
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 	public int getKeywordId() {
 		return keywordId;

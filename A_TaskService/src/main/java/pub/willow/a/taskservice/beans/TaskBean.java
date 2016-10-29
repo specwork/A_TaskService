@@ -11,11 +11,10 @@ public class TaskBean implements Serializable {
 	private static final long serialVersionUID = -6218483147968905157L;
 	
 	private int id; // 任务唯一标识
+	private int clientId;
 	private String url; // 任务url
 	private int keywordId;
 	private String keyword;
-	private int listpageId; // 板块id
-	private int siteId; // 网站Id
 	private int currentPage; // 翻页数量
 	private String charset; // 网站编码格式
 	private String source; // 网页源码
@@ -32,6 +31,14 @@ public class TaskBean implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 	public String getUrl() {
@@ -56,23 +63,6 @@ public class TaskBean implements Serializable {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
-	}
-
-	public int getListpageId() {
-		return listpageId;
-	}
-
-	public void setListpageId(int listpageId) {
-		this.listpageId = listpageId;
-	}
-
-
-	public int getSiteId() {
-		return siteId;
-	}
-
-	public void setSiteId(int siteId) {
-		this.siteId = siteId;
 	}
 
 	public int getCurrentPage() {

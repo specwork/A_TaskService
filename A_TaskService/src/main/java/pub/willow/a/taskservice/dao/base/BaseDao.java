@@ -1,4 +1,4 @@
-package pub.willow.a.taskservice.dao.db;
+package pub.willow.a.taskservice.dao.base;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -6,8 +6,8 @@ import java.util.Map;
 
 import pub.willow.a.taskservice.beans.KeywordBean;
 import pub.willow.a.taskservice.dao.KeywordsDao;
-import pub.willow.a.taskservice.dao.db.BaseDao;
-import pub.willow.a.taskservice.dao.db.DBUtil;
+import pub.willow.a.taskservice.dao.base.BaseDao;
+import pub.willow.a.taskservice.dao.base.DBUtil;
 
 public class KeywordsDaoImpl extends BaseDao implements KeywordsDao{
 
@@ -24,6 +24,10 @@ public class KeywordsDaoImpl extends BaseDao implements KeywordsDao{
 				 String keyword = map.get("keyword");
 				 KeywordBean keywordBean = new KeywordBean();
 				 keywordBean.setId(id);
+				 keywordBean.setMedicine(map.get("medicine"));
+				 keywordBean.setType(map.get("type"));
+				 keywordBean.setClient(map.get("client"));
+				 keywordBean.setClientId(Integer.parseInt(map.get("client_id")));
 				 keywordBean.setKeyword(keyword);
 				 keywordBean.setStatus(status);
 				 

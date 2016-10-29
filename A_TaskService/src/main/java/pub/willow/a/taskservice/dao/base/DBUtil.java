@@ -1,4 +1,4 @@
-package pub.willow.a.taskservice.dao.db;
+package pub.willow.a.taskservice.dao.base;
 
 import java.sql.Blob;
 import java.sql.Connection;
