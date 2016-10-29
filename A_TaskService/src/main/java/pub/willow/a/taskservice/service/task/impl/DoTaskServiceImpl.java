@@ -7,9 +7,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import pub.willow.a.baseservice.beans.DataBean;
-import pub.willow.a.baseservice.beans.Status;
-import pub.willow.a.baseservice.beans.TaskBean;
+import pub.willow.a.taskservice.beans.DataBean;
+import pub.willow.a.taskservice.beans.Status;
+import pub.willow.a.taskservice.beans.TaskBean;
 import pub.willow.a.taskservice.dao.DataDao;
 import pub.willow.a.taskservice.dao.TaskDao;
 import pub.willow.a.taskservice.service.SpiderInfoService;
@@ -52,9 +52,9 @@ public class DoTaskServiceImpl implements DoTaskService {
 				String path = "D:\\Willow\\A_Project\\" +taskId+"_"+keywordId+"_"+lispageId + ".txt";
 				saveFile(source,path );
 				task.setKeyword(keyword);
-				
+				int nextpage = source.contains(">下一页")?1:0;
 				 List<DataBean> dataBeanList = parseService.parseHtml(task);
-				 setSpider(dataBeanList,spider);
+				 setSpider(dataBeanList,spider,nextpage);
 				 dataDao.insertData(dataBeanList);
 				 
 				taskDao.updateTaskStatus(taskId , Status.DONE);
@@ -73,12 +73,13 @@ public class DoTaskServiceImpl implements DoTaskService {
 		
 	}
 	
-	private void setSpider(List<DataBean> dataBeanList, String spider) {
+	private void setSpider(List<DataBean> dataBeanList, String spider, int nextpage) {
 		if(dataBeanList == null || dataBeanList.size()<=0){
 			return ;
 		}
 		for(DataBean dataBean: dataBeanList){
 			dataBean.setSpider(spider);
+			dataBean.setNextpage(nextpage);
 		}
 		
 	}

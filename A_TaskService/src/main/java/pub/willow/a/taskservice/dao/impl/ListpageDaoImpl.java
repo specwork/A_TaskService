@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import pub.willow.a.baseservice.beans.ListpageBean;
-import pub.willow.a.baseservice.db.BaseDao;
-import pub.willow.a.baseservice.db.DBUtil;
-import pub.willow.a.baseservice.utils.StringUtil;
+import pub.willow.a.taskservice.beans.ListpageBean;
 import pub.willow.a.taskservice.dao.ListpageDao;
+import pub.willow.a.taskservice.dao.db.BaseDao;
+import pub.willow.a.taskservice.dao.db.DBUtil;
+import pub.willow.a.taskservice.utils.StringUtil;
 
 public class ListpageDaoImpl extends BaseDao implements ListpageDao {
 

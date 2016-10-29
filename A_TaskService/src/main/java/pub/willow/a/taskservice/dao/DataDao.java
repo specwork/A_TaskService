@@ -2,7 +2,7 @@ package pub.willow.a.taskservice.dao;
 
 import java.util.List;
 
-import pub.willow.a.baseservice.beans.DataBean;
+import pub.willow.a.taskservice.beans.DataBean;
 
 public interface DataDao {
 	

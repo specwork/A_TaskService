@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-import pub.willow.a.baseservice.beans.KeywordBean;
+import pub.willow.a.taskservice.beans.KeywordBean;
 
 public class TestKeywordsDao extends AbstractDependencyInjectionSpringContextTests {
 	

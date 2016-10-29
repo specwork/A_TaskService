@@ -2,7 +2,7 @@ package pub.willow.a.taskservice.dao;
 
 import java.util.List;
 
-import pub.willow.a.baseservice.beans.KeywordBean;
+import pub.willow.a.taskservice.beans.KeywordBean;
 
 public interface KeywordsDao {
 	

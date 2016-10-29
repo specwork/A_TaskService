@@ -1,13 +1,10 @@
 package pub.willow.a.taskservice.dao;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-import pub.willow.a.baseservice.beans.ListpageBean;
-import pub.willow.a.baseservice.beans.TaskBean;
+import pub.willow.a.taskservice.beans.TaskBean;
 
 public class TestTaskDao extends AbstractDependencyInjectionSpringContextTests {
 	

@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-import pub.willow.a.baseservice.beans.ListpageBean;
+import pub.willow.a.taskservice.beans.ListpageBean;
 
 public class TestListpageDao extends AbstractDependencyInjectionSpringContextTests {
 	

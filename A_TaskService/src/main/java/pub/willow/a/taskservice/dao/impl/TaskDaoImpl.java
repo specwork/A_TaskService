@@ -3,10 +3,10 @@ package pub.willow.a.taskservice.dao.impl;
 import java.util.List;
 import java.util.Map;
 
-import pub.willow.a.baseservice.beans.TaskBean;
-import pub.willow.a.baseservice.db.BaseDao;
-import pub.willow.a.baseservice.db.DBUtil;
+import pub.willow.a.taskservice.beans.TaskBean;
 import pub.willow.a.taskservice.dao.TaskDao;
+import pub.willow.a.taskservice.dao.db.BaseDao;
+import pub.willow.a.taskservice.dao.db.DBUtil;
 
 public class TaskDaoImpl extends BaseDao implements TaskDao {
 

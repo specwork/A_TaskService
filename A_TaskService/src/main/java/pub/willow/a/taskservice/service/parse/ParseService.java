@@ -2,8 +2,8 @@ package pub.willow.a.taskservice.service.parse;
 
 import java.util.List;
 
-import pub.willow.a.baseservice.beans.DataBean;
-import pub.willow.a.baseservice.beans.TaskBean;
+import pub.willow.a.taskservice.beans.DataBean;
+import pub.willow.a.taskservice.beans.TaskBean;
 
 public interface ParseService {
 	

@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import pub.willow.a.baseservice.beans.DataBean;
-import pub.willow.a.baseservice.beans.TaskBean;
-import pub.willow.a.baseservice.utils.RegexUtil;
-import pub.willow.a.baseservice.utils.WebpageUtil;
+import pub.willow.a.taskservice.beans.DataBean;
+import pub.willow.a.taskservice.beans.TaskBean;
 import pub.willow.a.taskservice.service.parse.ParseService;
+import pub.willow.a.taskservice.utils.RegexUtil;
+import pub.willow.a.taskservice.utils.WebpageUtil;
 
 public class ParseServiceImpl implements ParseService {
 
@@ -55,7 +55,6 @@ public class ParseServiceImpl implements ParseService {
 					
 					fieldInfo = RegexUtil.getMatchInfoSingle(topic, fieldRule);
 					if(fieldInfo == null && fieldRule.contains("line-clamp")) {
-						System.out.println(fieldInfo);
 						fieldInfo = RegexUtil.getMatchInfoSingle(topic, fieldRule, 2);
 					}
 					// 处理经过正则抽取之后的html乱码
@@ -98,7 +97,7 @@ public class ParseServiceImpl implements ParseService {
 			String title = m.get("title");
 			String source = getSource(title) ;
 			
-				dataBean.setSource(title.substring(title.lastIndexOf("_")));
+				dataBean.setSource(source);
 			dataBeanList.add(dataBean);
 		}
 		

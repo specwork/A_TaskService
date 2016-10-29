@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import pub.willow.a.baseservice.beans.KeywordBean;
-import pub.willow.a.baseservice.beans.ListpageBean;
-import pub.willow.a.baseservice.beans.Status;
-import pub.willow.a.baseservice.beans.TaskBean;
+import pub.willow.a.taskservice.beans.KeywordBean;
+import pub.willow.a.taskservice.beans.ListpageBean;
+import pub.willow.a.taskservice.beans.Status;
+import pub.willow.a.taskservice.beans.TaskBean;
 import pub.willow.a.taskservice.dao.KeywordsDao;
 import pub.willow.a.taskservice.dao.ListpageDao;
 import pub.willow.a.taskservice.dao.TaskDao;

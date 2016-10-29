@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import pub.willow.a.baseservice.beans.KeywordBean;
-import pub.willow.a.baseservice.db.BaseDao;
-import pub.willow.a.baseservice.db.DBUtil;
-import pub.willow.a.baseservice.utils.StringUtil;
+import pub.willow.a.taskservice.beans.KeywordBean;
 import pub.willow.a.taskservice.dao.KeywordsDao;
+import pub.willow.a.taskservice.dao.db.BaseDao;
+import pub.willow.a.taskservice.dao.db.DBUtil;
 
 public class KeywordsDaoImpl extends BaseDao implements KeywordsDao{
 
