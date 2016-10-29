@@ -11,4 +11,5 @@ public interface DataDao {
 	
 	public int insertData(List<DataBean> dataBeanList);
 	
+	public List<DataBean> queryDataByKeyword(int keywordId);
 }

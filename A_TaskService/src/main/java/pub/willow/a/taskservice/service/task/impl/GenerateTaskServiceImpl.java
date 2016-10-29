@@ -19,9 +19,6 @@ public class GenerateTaskServiceImpl implements GenerateTaskService {
 	@Resource(name = "keywordsDao")
 	public KeywordsDao keywordsDao;
 
-	@Resource(name = "listpageDao")
-	public ListpageDao listpageDao;
-
 	@Resource(name = "taskDao")
 	public TaskDao taskDao;
 

@@ -2,6 +2,7 @@ package pub.willow.a.taskservice.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import pub.willow.a.taskservice.beans.DataBean;
 import pub.willow.a.taskservice.dao.DataDao;
@@ -31,6 +32,30 @@ public class DataDaoImpl extends BaseDao implements DataDao  {
 //		db.prepareExecuteUpdateBatch(sql, paramsList );
 		db.prepareExecuteUpdateBatchByDuplicate(sql, paramsList);
 		return 0;
+	}
+
+	public List<DataBean> queryDataByKeyword(int keywordId) {
+		List<DataBean> datas = new ArrayList<DataBean>();
+		String sql = "SELECT * FROM `data_new` WHERE keyword_id=" + keywordId;
+		DBUtil db = getDbUtilByDbName(A_PROJECT);
+		List<Map<String, String>> res = db.executeQuery(sql);
+		if(res == null || res.size()<=0) {
+			return null;
+		}
+		for(Map<String,String> m:res) {
+			DataBean data = new DataBean();
+			data.setClientId(Integer.parseInt(m.get("client_id")));
+			data.setKeyword(m.get("keyword"));
+			data.setKeywordId(keywordId);
+			data.setSource(m.get("source"));
+			data.setSummary(m.get("summary"));
+			data.setTaskId(Integer.parseInt(m.get("task_id")));
+			data.setTitle(m.get("title"));
+			data.setUrl(m.get("url"));
+			
+			datas.add(data);
+		}
+		return datas;
 	}
 	
 	

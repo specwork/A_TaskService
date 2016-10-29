@@ -5,7 +5,7 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 	default-autowire="byName">
 	
-	<bean name="spiderInfoService" class="pub.willow.a.taskservice.service.impl.SpiderInfoServiceImpl"></bean>
+	<bean name="mentionService" class="pub.willow.a.taskservice.service.impl.MentionServiceImpl"></bean>
 	
 	<bean name="generateTaskService" class="pub.willow.a.taskservice.service.task.impl.GenerateTaskServiceImpl"></bean>
 	

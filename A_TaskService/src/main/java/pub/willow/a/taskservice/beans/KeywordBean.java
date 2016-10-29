@@ -8,6 +8,8 @@ public class KeywordBean {
 	private String client;
 	private int clientId;
 	private String keyword;
+	private int mention_1;
+	private int mention_2;
 	private int status;
 	public int getId() {
 		return id;
@@ -45,6 +47,19 @@ public class KeywordBean {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	
+	public int getMention_1() {
+		return mention_1;
+	}
+	public void setMention_1(int mention_1) {
+		this.mention_1 = mention_1;
+	}
+	public int getMention_2() {
+		return mention_2;
+	}
+	public void setMention_2(int mention_2) {
+		this.mention_2 = mention_2;
 	}
 	public int getStatus() {
 		return status;

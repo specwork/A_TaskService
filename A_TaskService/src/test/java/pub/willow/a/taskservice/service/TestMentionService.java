@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-public class TestSpiderInfoService extends AbstractDependencyInjectionSpringContextTests {
+public class TestMentionService extends AbstractDependencyInjectionSpringContextTests {
 	
 	@Override
 	protected String[] getConfigLocations() {
@@ -12,13 +12,14 @@ public class TestSpiderInfoService extends AbstractDependencyInjectionSpringCont
 				"applicationContext-init.xml",
 				"applicationContext-dao.xml",
 				"applicationContext-service.xml",
-				"applicationContext-redis.xml"
 //				"applicationContext-*.xml"
 	  			  };
 	}
 	
-	@Resource(name="spiderInfoService")
-	public SpiderInfoService spiderInfoService;
+	@Resource(name="mentionService")
+	public MentionService mentionService;
 	
-	
+	public void test() {
+		mentionService.calMention();
+	}
 }

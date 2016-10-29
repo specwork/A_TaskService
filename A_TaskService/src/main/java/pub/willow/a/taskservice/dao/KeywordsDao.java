@@ -8,6 +8,10 @@ public interface KeywordsDao {
 	
 	public List<KeywordBean> queryKeywords(int status, int limit);
 	
+	public KeywordBean queryKeyword(int status);
+	
+	public void updateMention(KeywordBean bean);
+
 	public void updateStatus(int id, int status);
 	
 }
